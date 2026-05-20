@@ -1,0 +1,25 @@
+# dependencies
+node_modules
+
+# env
+.env
+
+# build files
+dist
+build
+
+# logs
+npm-debug.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# vscode
+.vscode
+
+# vite
+clientdist
+
+# optional
+coverage
