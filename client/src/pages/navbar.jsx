@@ -3,16 +3,16 @@ import { useState } from "react";
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
-    <nav className="bg-gray-900 shadow-md fixed w-full top-0 z-50">
+    <nav className="bg-gray-900 shadow-md sticky w-full top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* 1. Bagian Logo (Kiri) */}
           <div className="shrink-0">
             <a
               href="#"
-              className="text-2xl font-bold text-blue-500 hover:text-blue-400 transition"
+              className="text-2xl font-bold text-blue-500 hover:text-blue-400 transition capitalize"
             >
-              MyBrand
+              game
             </a>
           </div>
 
