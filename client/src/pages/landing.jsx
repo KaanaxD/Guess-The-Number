@@ -4,7 +4,7 @@ function Landing() {
   return (
     <>
       <Navbar />
-      <h1>Hai</h1>
+      <h1 className="mt-13">Hai</h1>
     </>
   );
 }
