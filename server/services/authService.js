@@ -9,7 +9,7 @@ async function makeAccount(nama, password) {
   try {
     await query.registerQuery(nama, hashPasswrd);
   } catch (error) {
-    throw createError(401,"Username telah terdaftar")
+    throw createError(409,"Username telah terdaftar")
   }
 }
 

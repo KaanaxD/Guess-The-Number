@@ -23,6 +23,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/game", authmiddleware, gameRouter);
 app.use("/api/profile", authmiddleware, profileRouter);
 app.use("/api/leaderboard", leaderboardRouter);
- 
-app.use(errorHandler.errorHandler);
+
+app.use(errorHandler.errorHandler); 
 app.listen(port, () => console.log(`listening on port ${port}!`));
