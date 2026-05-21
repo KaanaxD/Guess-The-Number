@@ -7,12 +7,13 @@ const authRouter = require("./routers/authRouter")
 const gameRouter = require("./routers/gameRouter")
 const leaderboardRouter = require("./routers/leaderboardRouter")
 const authmiddleware = require("./middlewares/authmiddleware")
-
+const profileRouter = require("./routers/profileRouter")
 
 app.use(express.json())
 app.use(express.urlencoded())
 app.use("/api/auth",authRouter)
 app.use("/api/game",authmiddleware,gameRouter)
+app.use("/api/profile",authmiddleware,profileRouter)
 app.use("/api/leaderboard",leaderboardRouter)
 
 
