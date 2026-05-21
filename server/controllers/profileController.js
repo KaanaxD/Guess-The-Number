@@ -8,7 +8,6 @@ async function getProfile(req,res,next){
         return next(createError(401,"blm login"))
     }
     let result = await query.getProfileQuery(username)
-    console.log(result)
     res.json({
         success: true,
         message: "noh profil",
