@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@layer components {
+  .bubble {
+    @apply animate-pulse absolute w-50 h-50 rounded-full blur-3xl opacity-70;
+  }
+}
