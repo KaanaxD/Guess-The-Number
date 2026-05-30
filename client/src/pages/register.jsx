@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
-
-function Login() {
+function Register() {
   return (
     <main className="bg-gray-950 min-h-screen flex items-center justify-center">
+      
       {/* Card Container */}
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center text-white mb-4">
-          Login
+          Register
         </h2>
 
         <form>
@@ -48,16 +47,8 @@ function Login() {
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="submit"
             >
-              Login
+              Register
             </button>
-            <Link to="/register">
-              <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
-                type="submit"
-              >
-                Sign up
-              </button>
-            </Link>
           </div>
         </form>
       </div>
@@ -65,4 +56,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
