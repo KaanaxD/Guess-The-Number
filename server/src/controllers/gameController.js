@@ -7,7 +7,7 @@ const input = z.object({
   guess: z.number(),
 });
 
-async function startNewGame(req, res, next) {
+export async function startNewGame(req, res, next) {
   let target = rng();
   let check = await service.historyCheck(req.user.id);
   if (!check) {
@@ -22,7 +22,7 @@ async function startNewGame(req, res, next) {
   });
 }
 
-async function checkGame(req, res, next) {
+export async function checkGame(req, res, next) {
   try {
     let guess = req.body.guess;
     if (!guess) {
@@ -39,4 +39,4 @@ async function checkGame(req, res, next) {
     next(error);
   }
 }
-module.exports = { startNewGame, checkGame };
+

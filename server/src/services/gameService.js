@@ -1,4 +1,5 @@
 import * as  query from "../models/gameModels";
+import { setLeaderboardQuery } from "../models/leaderboardModel";
 
 async function setNewGame(user_id, rng) {
   await query.setGameQuery(user_id, rng, 0, false);
@@ -49,11 +50,12 @@ async function guessCheck(id, guess) {
     target[0].attempt + 1,
     true,
   );
-  await query.setLeaderboardQuery(id, target[0].attempt + 1);
+  let result = await setLeaderboardQuery(id, target[0].attempt + 1);
   return {
     succes: true,
     correct: true,
     message: "tebakan benar",
+    result: result[0]
   };
 }
 

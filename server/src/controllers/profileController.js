@@ -2,7 +2,7 @@ const { success } = require("zod")
 const { createError } = require("../middlewares/errorHandler")
 let query = require("../models/profileModel")
 
-async function getProfile(req,res,next){
+export async function getProfile(req,res,next){
     let username = req.user.username
     if(!username){
         return next(createError(401,"blm login"))
@@ -14,5 +14,3 @@ async function getProfile(req,res,next){
         profil: result
     })
 }
-
-module.exports = {getProfile} 

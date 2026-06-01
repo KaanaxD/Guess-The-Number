@@ -3,16 +3,16 @@ let jwt = require("jsonwebtoken");
 let query = require("../models/usersModel");
 let { createError } = require("../middlewares/errorHandler");
 
-async function makeAccount(nama, password) {
+export async function makeAccount(username:string, password:string) {
   let hashPasswrd = await bcrypt.hash(password, 10);
   try {
-    await query.registerQuery(nama, hashPasswrd);
+    await query.registerQuery(username, hashPasswrd);
   } catch (error) {
     throw createError(409,"Username telah terdaftar")
   }
 }
 
-async function verifyAcc(username, password) {
+export async function verifyAcc(username:string, password:string) {
   let user = await query.userQuery(username);
   if (user.length == 0) {
     throw createError(404, "username tidak ditemukan");
@@ -41,4 +41,3 @@ async function verifyAcc(username, password) {
   })
 }
 
-module.exports = { makeAccount, verifyAcc };

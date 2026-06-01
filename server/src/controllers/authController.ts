@@ -23,18 +23,16 @@ export async function register(req:Request<{},{},ReqBody>, res:Response, next:Ne
   }
 }
 
-async function login(req:Request<{},{},ReqBody>, res:Response, next:NextFunction) {
+export async function login(req:Request<{},{},ReqBody>, res:Response, next:NextFunction) {
   try {
     const input = await inputSchema.parseAsync(req.body)
-    let result = await service.verifyAcc(input.username, input.password);
+    let data = await service.verifyAcc(input.username, input.password);
     res.json({
       succes: true,
       message: "Berhasil login",
-      result,
+      data: data,
     });
   } catch (error) {
     next(error);
   }
 }
-
-module.exports = { register, login };
