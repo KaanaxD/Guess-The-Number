@@ -1,11 +1,19 @@
-import * as  query from "../models/gameModels";
-import { setLeaderboardQuery } from "../models/leaderboardModel";
+import * as query from "../models/gameModels";
+import { gameResultQuery } from "../models/gameModels";
 
-async function setNewGame(user_id, rng) {
+type Result = Promise<{
+  success: boolean
+  correct: boolean
+  message: string
+  status: string;
+  data?: GameResult | undefined
+} | undefined>;
+
+export async function setNewGame(user_id: number, rng: number) {
   await query.setGameQuery(user_id, rng, 0, false);
 }
 
-async function historyCheck(id) {
+export async function historyCheck(id: number) {
   let done = await query.getLatestGameQuery(id);
   if (done.length == 0) {
     return true;
@@ -15,7 +23,7 @@ async function historyCheck(id) {
   return false;
 }
 
-async function guessCheck(id, guess) {
+export async function guessCheck(id: number, guess: number): Result {
   let target = await query.getLatestGameQuery(id);
   if (!target.length || target[0].is_finished) {
     throw {
@@ -31,13 +39,13 @@ async function guessCheck(id, guess) {
     } else {
       status = "kebesaran";
     }
-   let result = await query.setGameQuery(
+    await query.setGameQuery(
       id,
       target[0].target_number,
       target[0].attempt + 1,
       false,
     );
-        return {
+    return {
       success: true,
       correct: false,
       message: "tebakan salah",
@@ -50,13 +58,14 @@ async function guessCheck(id, guess) {
     target[0].attempt + 1,
     true,
   );
-  let result = await setLeaderboardQuery(id, target[0].attempt + 1);
+  let result = await gameResultQuery(id, target[0].attempt + 1);
   return {
-    succes: true,
+    success: true,
     correct: true,
     message: "tebakan benar",
-    result: result[0]
+    status: "benar",
+    data: {
+      ...result[0]
+    }
   };
 }
-
-module.exports = { setNewGame, historyCheck, guessCheck };

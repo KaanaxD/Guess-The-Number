@@ -7,15 +7,15 @@ const inputSchema = z.object({
   password: z.string().min(8,"Password minimal 8 karakter"),
 });
 
-type ReqBody = z.infer<typeof inputSchema>;
+export type ReqBody = z.infer<typeof inputSchema>;
 
-export async function register(req:Request<{},{},ReqBody>, res:Response, next:NextFunction) {
+export async function register(req:Request<{},{},ReqBody>, res:Response<ResBody>, next:NextFunction) {
   try {
     let input = await inputSchema.parseAsync(req.body);
     
     await service.makeAccount(input.username, input.password);
     res.json({
-      succes: true,
+      success: true,
       message: "Akun berhasil dibuat",
     });    
   } catch (error) {
@@ -23,12 +23,12 @@ export async function register(req:Request<{},{},ReqBody>, res:Response, next:Ne
   }
 }
 
-export async function login(req:Request<{},{},ReqBody>, res:Response, next:NextFunction) {
+export async function login(req:Request<{},{},ReqBody>, res:Response<ResBody>, next:NextFunction) {
   try {
     const input = await inputSchema.parseAsync(req.body)
     let data = await service.verifyAcc(input.username, input.password);
     res.json({
-      succes: true,
+      success: true,
       message: "Berhasil login",
       data: data,
     });

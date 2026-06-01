@@ -15,26 +15,3 @@ export async function getLeaderboardQuery(): Promise<Leaderboard[]> {
   );
   return result.rows;
 }
-
-export async function setLeaderboardQuery(id: number, attempt: number) {
-  let result = await pool.query(
-    `WITH inserted AS (
-    INSERT INTO leaderboard (user_id, attempts)
-    VALUES ($1, $2)
-    RETURNING attempts
-    )
-    SELECT
-        i.attempts,
-        COUNT(DISTINCT best_attempt) + 1 AS rank
-    FROM inserted i
-    LEFT JOIN (
-        SELECT MIN(attempts) AS best_attempt
-        FROM leaderboard
-        GROUP BY user_id
-    ) lb
-    ON lb.best_attempt < i.attempts
-    GROUP BY i.attempts;`,
-    [id, attempt],
-  );
-  return result.rows;
-}
