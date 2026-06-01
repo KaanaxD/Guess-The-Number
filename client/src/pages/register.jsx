@@ -1,7 +1,30 @@
+import { useState } from "react";
+import api from "../service/api";
+
 function Register() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = async () => {
+    console.log({
+      username,
+      password,
+    });
+
+    try {
+      const res = await api.post("/api/auth/register", {
+        username,
+        password,
+      });
+
+      console.log("SUKSES:", res.data);
+    } catch (err) {
+      console.log("STATUS:", err.response?.status);
+      console.log("DATA:", err.response?.data);
+    }
+  };
   return (
     <main className="bg-gray-950 min-h-screen flex items-center justify-center">
-      
       {/* Card Container */}
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center text-white mb-4">
@@ -19,7 +42,8 @@ function Register() {
             </label>
             <input
               className="bg-gray-700 text-gray-300 placeholder:text-gray-500 border border-gray-600 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               type="text"
               placeholder="Enter your username"
             />
@@ -35,7 +59,8 @@ function Register() {
             </label>
             <input
               className="bg-gray-700 text-gray-300 placeholder:text-gray-500 border border-gray-600 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="Enter your password"
             />
@@ -45,7 +70,8 @@ function Register() {
           <div className="flex flex-col justify-evenly gap-3">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="submit"
+              type="button"
+              onClick={handleRegister}
             >
               Register
             </button>

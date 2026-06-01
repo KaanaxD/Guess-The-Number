@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import api from "../service/api";
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await api.post("/api/auth/login", {
+        username,
+        password,
+      });
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <main className="bg-gray-950 min-h-screen flex items-center justify-center">
       {/* Card Container */}
@@ -20,7 +38,8 @@ function Login() {
             </label>
             <input
               className="bg-gray-700 text-gray-300 placeholder:text-gray-500 border border-gray-600 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               type="text"
               placeholder="Enter your username"
             />
@@ -36,7 +55,8 @@ function Login() {
             </label>
             <input
               className="bg-gray-700 text-gray-300 placeholder:text-gray-500 border border-gray-600 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="Enter your password"
             />
@@ -54,6 +74,7 @@ function Login() {
               <button
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
                 type="submit"
+                onClick={handleLogin}
               >
                 Sign up
               </button>
