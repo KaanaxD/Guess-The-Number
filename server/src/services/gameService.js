@@ -1,4 +1,4 @@
-let query = require("../models/gameModels");
+import * as  query from "../models/gameModels";
 
 async function setNewGame(user_id, rng) {
   await query.setGameQuery(user_id, rng, 0, false);

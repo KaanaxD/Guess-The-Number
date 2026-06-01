@@ -1,7 +1,7 @@
-const db = require("../config/db");
+import { pool } from "../config/db";
 
 async function getProfileQuery(nama) {
-  let result = await db.query(
+  let result = await pool.query(
     `SELECT users.username,COALESCE(MIN(leaderboard.attempts),-1) AS best_attempt
 FROM users LEFT JOIN leaderboard ON users.id = leaderboard.user_id WHERE users.username = $1
 GROUP BY users.username`,

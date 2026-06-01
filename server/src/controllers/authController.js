@@ -8,6 +8,8 @@ const input = z.object({
   password: z.string().min(8),
 });
 
+
+
 async function register(req, res, next) {
   let { username, password } = req.body;
 

@@ -1,11 +1,9 @@
-let getLeaderboardQuery = require("../models/leaderboardModel")
+import { getLeaderboardQuery } from "../models/leaderboardModel";
 
-async function getLeaderboard(req,res,next){
+export async function getLeaderboard(req,res,next){
     let leaderboard = await getLeaderboardQuery();
     res.json({
         success: true,
         leaderboard: leaderboard
     })
 }
-
-module.exports = {getLeaderboard}

@@ -1,7 +1,7 @@
-let db = require("../config/db");
+import { pool } from "../config/db";
 
-async function getLeaderboardQuery() {
-  let result = await db.query(
+export async function getLeaderboardQuery() : Promise<Leaderboard[]> {
+  let result = await pool.query(
     `SELECT
      DENSE_RANK() OVER (
         ORDER BY MIN(leaderboard.attempts) ASC
@@ -15,5 +15,3 @@ async function getLeaderboardQuery() {
   );
   return result.rows;
 }
-
-module.exports = getLeaderboardQuery;
