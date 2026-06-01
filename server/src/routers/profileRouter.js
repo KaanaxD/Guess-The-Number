@@ -1,7 +1,6 @@
 let controller = require("../controllers/profileController")
 let express = require("express")
-let router = express.Router()
+export let profileRouter = express.Router()
 
-router.get("/",controller.getProfile)
+profileRouter.get("/",controller.getProfile)
 
-module.exports = router

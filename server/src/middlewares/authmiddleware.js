@@ -1,7 +1,7 @@
 let jwt = require("jsonwebtoken")
-let {createError} = require("../middlewares/errorHandler")
+let {createError} = require("./errorHandler")
 
-function authmiddleware(req,res,next){
+export function authmiddleware(req,res,next){
     let token = req.headers.authorization
     if(!token){
         return next(createError(401 ,"belum login"))
@@ -15,5 +15,3 @@ function authmiddleware(req,res,next){
         next()
     }
 }
-
-module.exports = authmiddleware
