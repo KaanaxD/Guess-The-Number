@@ -2,7 +2,6 @@ let bcrypt = require("bcrypt");
 let jwt = require("jsonwebtoken");
 let query = require("../models/usersModel");
 let { createError } = require("../middlewares/errorHandler");
-const { verify } = require("jsonwebtoken");
 
 async function makeAccount(nama, password) {
   let hashPasswrd = await bcrypt.hash(password, 10);
