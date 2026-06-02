@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import api from "../service/api";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -13,9 +15,13 @@ function Login() {
         password,
       });
 
-      console.log(res.data);
+      localStorage.setItem("token", res.data.result.token);
+
+      navigate("/game");
+
+      console.log("TOKEN DISIMPAN");
     } catch (err) {
-      console.log(err);
+      console.log(err.response?.data);
     }
   };
 
@@ -66,15 +72,15 @@ function Login() {
           <div className="flex flex-col justify-evenly gap-3">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="submit"
+              type="button"
+              onClick={handleLogin}
             >
               Login
             </button>
             <Link to="/register">
               <button
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
-                type="submit"
-                onClick={handleLogin}
+                type="button"
               >
                 Sign up
               </button>
