@@ -5,7 +5,7 @@ import { rng } from "../utils/rng"
 import { z } from "zod"
 
 const inputSchema = z.object({
-  guess: z.number(),
+  guess: z.number("guess berupa angka"),
 });
 
 type GuessBody = z.infer<typeof inputSchema>
