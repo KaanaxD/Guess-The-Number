@@ -1,7 +1,8 @@
-let bcrypt = require("bcrypt");
-let jwt = require("jsonwebtoken");
-let query = require("../models/usersModel");
-let { createError } = require("../middlewares/errorHandler");
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import * as query from "../models/usersModel"
+import { createError } from "../middlewares/errorHandler"
+const SECRET = process.env.JWT_SECRET as string
 
 export async function makeAccount(username:string, password:string) {
   let hashPasswrd = await bcrypt.hash(password, 10);
@@ -14,7 +15,7 @@ export async function makeAccount(username:string, password:string) {
 
 export async function verifyAcc(username:string, password:string) {
   let user = await query.userQuery(username);
-  if (user.length == 0) {
+  if (!user[0]) {
     throw createError(404, "username tidak ditemukan");
   }
   let check = await bcrypt.compare(password, user[0].password);
@@ -26,7 +27,7 @@ export async function verifyAcc(username:string, password:string) {
       id: user[0].id,
       username: user[0].username,
     },
-    process.env.JWT_SECRET,
+     SECRET,
     {
       expiresIn: "12h",
     },
