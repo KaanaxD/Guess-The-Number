@@ -41,7 +41,7 @@ function Navbar() {
                 href="#"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition"
               >
-                Layanan
+                Game
               </a>
               <Link
                 to="/contact"
@@ -124,18 +124,18 @@ function Navbar() {
             >
               Leaderboard
             </Link>
-            <a
-              href="#"
+            <Link
+              to="/game"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
             >
-              Layanan
-            </a>
-            <a
-              href="#"
+              Game
+            </Link>
+            <Link
+              to="/contact"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
             >
               Kontak
-            </a>
+            </Link>
 
             {/* Tombol Login Mobile */}
             <Link
