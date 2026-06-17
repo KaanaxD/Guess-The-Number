@@ -8,6 +8,7 @@ import {authmiddleware} from "./middlewares/authmiddleware.js"
 import {profileRouter} from "./routers/profileRouter.js"
 import cors from "cors"
 import express from "express"
+import rateLimit from "./config/rateLimiter.js";
 const app = express();
 
 app.use(
@@ -19,6 +20,10 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded());
+
+app.use("/api/auth",rateLimit().authRateLimit())
+app.use("/api",rateLimit().generalRateLimit())
+
 app.use("/api/auth", authRouter);
 app.use("/api/game", authmiddleware, gameRouter);
 app.use("/api/profile", authmiddleware, profileRouter);
